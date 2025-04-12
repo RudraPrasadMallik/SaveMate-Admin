@@ -1,0 +1,68 @@
+.seo-container {
+    background-color: #fff;
+    padding: 30px;
+    max-width: 700px;
+    margin: 40px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .seo-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .seo-container label {
+    font-weight: bold;
+    display: block;
+    margin: 10px 0 5px;
+  }
+  
+  select {
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+  }
+  
+  .seo-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    grid-column: span 2;
+  }
+  
+  input,
+  textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  button {
+    grid-column: span 2;
+    padding: 12px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #388e3c;
+  }
+  

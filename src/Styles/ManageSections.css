@@ -1,0 +1,109 @@
+.admin-container {
+  padding: 20px;
+  max-width: 700px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.admin-header h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.logout-btn {
+  padding: 10px 15px;
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #b71c1c;
+}
+
+.form-inline {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #388e3c;
+}
+
+button.cancel-btn {
+  background-color: #9e9e9e;
+}
+
+button.cancel-btn:hover {
+  background-color: #757575;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f1f1f1;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  align-items: center;
+}
+
+.list-item > div > button {
+  margin-left: 8px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .form-inline {
+    flex-direction: column;
+  }
+
+  .list-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .list-item > div {
+    margin-top: 10px;
+  }
+
+  .logout-btn {
+    padding: 8px 12px;
+  }
+
+  button {
+    width: 100%;
+  }
+}

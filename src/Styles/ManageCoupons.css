@@ -1,0 +1,62 @@
+.admin-container {
+  padding: 20px;
+  max-width: 700px;
+  margin: auto;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 700px;
+  margin: auto;
+}
+
+.form-grid label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+input,
+textarea,
+button {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+textarea {
+  min-height: 80px;
+  resize: vertical;
+  grid-column: span 2;
+}
+
+button {
+  grid-column: span 2;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #388e3c;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  text-align: center;
+}
