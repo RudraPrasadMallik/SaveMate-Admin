@@ -6,20 +6,21 @@ import ProtectedRoute from "./admin/components/ProtectedRouts";
 import ManageSections from "./admin/components/ManageSections";
 import ManageCoupons from "./admin/components/ManageCoupons";
 import ManageSeo from "./admin/components/ManageSeo";
-import ManageAds from "./admin/components/ManageAds"; // ✅ New import
+import ManageAds from "./admin/components/ManageAds"; 
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to="/admin/home" />} />
+        <Route path="/" element={<Navigate to="/admin/login" />} />
+        <Route path="/admin" element={<Navigate to="/admin/login"/>}/>
         <Route path="/admin/login" element={<Login />} />
 
         <Route
           path="/admin/home"
           element={
             <ProtectedRoute>
-              <AdminHome />
+              <AdminHome/>
             </ProtectedRoute>
           }
         />

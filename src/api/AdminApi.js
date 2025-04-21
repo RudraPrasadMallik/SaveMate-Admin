@@ -3,7 +3,7 @@ import axios from "axios";
 class AdminApi {
   constructor() {
     this.api = axios.create({
-      baseURL: "https://savemate.onrender.com",
+      baseURL:"https://savemate.onrender.com",
       withCredentials: true,
     });
 
