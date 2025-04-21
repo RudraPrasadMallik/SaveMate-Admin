@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../Styles/Login.css";
-import AdminApi from "../../api/AdminApi"; // central API call
-
+import AdminApi from "../../api/AdminApi";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -12,19 +11,32 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  const validateForm = () => {
+    if (!username.trim()) {
+      setError("Username is required.");
+      return false;
+    }
+    if (!password.trim()) {
+      setError("Password is required.");
+      return false;
+    }
+    return true;
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
+
     setError(null);
     setLoading(true);
-  
+
     try {
       const response = await AdminApi.login({ username, password });
-      console.log("Login response:", response);
-  
       const { token } = response.data;
+
       sessionStorage.setItem("admin_token", token);
       sessionStorage.setItem("isAuthenticated", "true");
-  
+
       navigate("/admin/home");
     } catch (err) {
       setError("Invalid credentials. Please try again.");
@@ -32,28 +44,30 @@ const Login = () => {
       setLoading(false);
     }
   };
-  
+
   return (
-    <div>
-      <h2>Admin Login</h2>
-      <form onSubmit={handleLogin}>
+    <div className="login-container">
+      <h2 className="login-title">Admin Login</h2>
+      <form className="login-form" onSubmit={handleLogin}>
         <input
+          className="login-input"
           type="text"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-        /><br />
+        />
         <input
+          className="login-input"
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-        /><br />
-        <button type="submit" disabled={loading}>
+        />
+        <button className="login-button" type="submit" disabled={loading}>
           {loading ? "Logging in..." : "Login"}
         </button>
-        {loading && <p>Authenticating with server, please wait...</p>}
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {loading && <p className="login-message">Authenticating with server...</p>}
+        {error && <p className="login-error">{error}</p>}
       </form>
     </div>
   );
