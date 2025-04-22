@@ -34,11 +34,14 @@ const Login = () => {
       const response = await AdminApi.login({ username, password });
       const { token } = response.data;
 
-      sessionStorage.setItem("admin_token", token);
-      sessionStorage.setItem("isAuthenticated", "true");
+      // Store token in localStorage for persistence even after the browser is closed
+      localStorage.setItem("admin_token", token);  // Changed sessionStorage to localStorage
+      localStorage.setItem("isAuthenticated", "true");
 
+      // Redirect to home page
       navigate("/admin/home");
     } catch (err) {
+      console.error("Login Error:", err.response ? err.response.data : err); // Logging actual error
       setError("Invalid credentials. Please try again.");
     } finally {
       setLoading(false);

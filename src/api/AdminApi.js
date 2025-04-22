@@ -3,11 +3,11 @@ import axios from "axios";
 class AdminApi {
   constructor() {
     this.api = axios.create({
-      baseURL:"http://localhost:8081",
-      // "https://savemate.onrender.com",
+      baseURL:"https://savemate.onrender.com",
       withCredentials: true,
     });
 
+    // ✅ Add request interceptor to attach token
     this.api.interceptors.request.use((config) => {
       const token = localStorage.getItem("admin_token");
       if (token) {
@@ -15,6 +15,18 @@ class AdminApi {
       }
       return config;
     });
+
+    // ✅ Add response interceptor to handle expired tokens
+    this.api.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+          localStorage.removeItem("admin_token");
+          window.location.href = "/auth/login"; 
+        }
+        return Promise.reject(error);
+      }
+    );
   }
 
   login(credentials) {
@@ -22,15 +34,18 @@ class AdminApi {
   }
 
   logout() {
+    localStorage.removeItem("admin_token");
     return this.api.post("/auth/logout");
   }
 
   setAuthToken() {
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("admin_token");
     if (token) {
       this.api.defaults.headers["Authorization"] = `Bearer ${token}`;
     }
   }
+
+  // ================= Admin Endpoints =================
 
   getAllSections() {
     this.setAuthToken();
@@ -91,5 +106,5 @@ class AdminApi {
   }
 }
 
-const adminApi = new AdminApi(); // ✅ assigned to variable and used
-export default adminApi;         // ✅ properly exported
+const adminApi = new AdminApi();
+export default adminApi;

@@ -12,6 +12,7 @@ const ManageSections = () => {
   const [editId, setEditId] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [validationError, setValidationError] = useState("");  // For validation error message
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,6 +35,14 @@ const ManageSections = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Validate required fields
+    if (!title || !description || orderIndex === "") {
+      setValidationError("All fields are required.");
+      return; // Prevent form submission if validation fails
+    } else {
+      setValidationError(""); // Clear validation error if all fields are valid
+    }
 
     const sectionData = { 
       title,
@@ -71,6 +80,7 @@ const ManageSections = () => {
     setOrderIndex(0);  // Reset orderIndex
     setStatus(true);  // Reset status
     setEditId(null);
+    setValidationError(""); // Reset validation error
   };
 
   const handleEdit = (section) => {
@@ -100,6 +110,7 @@ const ManageSections = () => {
       </div>
 
       {error && <div className="error-message">{error}</div>}
+      {validationError && <div className="validation-error">{validationError}</div>} {/* Display validation error */}
 
       <form onSubmit={handleSubmit} className="form-inline">
         <input
@@ -131,7 +142,7 @@ const ManageSections = () => {
           />
           Active
         </label>
-        <button type="submit" disabled={loading || !title || !description}>
+        <button type="submit" disabled={loading || !title || !description || orderIndex === ""}>
           {editId ? "Update" : "Add"} Section
         </button>
         {editId && <button type="button" onClick={resetForm}>Cancel</button>}

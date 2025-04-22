@@ -9,7 +9,7 @@ const AdminHome = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("isAuthenticated");
+    sessionStorage.removeItem("isAuthenticated");
     navigate("/admin/login");
   };
 
