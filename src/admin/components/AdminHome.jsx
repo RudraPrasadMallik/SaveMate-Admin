@@ -1,5 +1,3 @@
-// File: src/admin/components/AdminHome.jsx
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../../Styles/AdminHome.css";
@@ -42,9 +40,7 @@ const AdminHome = () => {
   <h2>Manage SEO</h2>
   <p>Update meta title, description, and keywords</p>
 </div>
-
-
-            
+         
       </div>
     </div>
   );

@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 import AdminApi from "../../api/AdminApi";
 import "../../Styles/ManageSeo.css";
 import { toast } from "react-toastify";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 const ManageSeo = () => {
   const [pageName, setPageName] = useState("home");
+   const navigate = useNavigate();
   const [seo, setSeo] = useState({
     title: "",
     description: "",
@@ -50,6 +54,7 @@ const ManageSeo = () => {
 
   return (
     <div className="seo-container">
+      <button className="logout-btn" onClick={() => navigate("/admin/home")}>Back to Dashboard</button>
       <h2>Manage SEO</h2>
 
       <label>Select Page:</label>
@@ -100,6 +105,7 @@ const ManageSeo = () => {
           <button onClick={handleUpdate}>Update SEO</button>
         </>
       )}
+       <ToastContainer position="top-right" autoClose={2000} />
     </div>
   );
 };

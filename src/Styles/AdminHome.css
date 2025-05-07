@@ -34,7 +34,7 @@
   
   .admin-card {
     padding: 24px;
-    color: white;
+    color: rgba(255, 255, 255, 0.898);
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     cursor: pointer;
@@ -57,4 +57,6 @@
   .red {
     background: linear-gradient(to right, #ec4899, #ef4444);
   }
-  
+  .purple{
+    background: linear-gradient(to right, rgba(128, 0, 128, 0.577), #ef44446a);
+  }
