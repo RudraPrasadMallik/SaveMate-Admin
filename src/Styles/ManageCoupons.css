@@ -1,22 +1,45 @@
+/* Container Styling */
 .admin-container {
   padding: 20px;
-  max-width: 700px;
+  max-width: 900px;
   margin: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Header Styling */
 .admin-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
+.admin-header h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+.logout-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* Form Grid Styling */
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
-  max-width: 700px;
-  margin: auto;
+  margin-bottom: 30px;
 }
 
 .form-grid label {
@@ -24,39 +47,123 @@
   flex-direction: column;
   font-weight: 600;
   font-size: 14px;
+  color: #555;
 }
 
+/* Input and Textarea Styling */
 input,
-textarea,
-button {
+textarea {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 14px;
   margin-top: 5px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #4caf50;
+  outline: none;
 }
 
 textarea {
   min-height: 80px;
   resize: vertical;
-  grid-column: span 2;
 }
 
-button {
+/* Submit Button Styling */
+button[type="submit"] {
   grid-column: span 2;
   background-color: #4caf50;
   color: white;
   border: none;
-  cursor: pointer;
+  padding: 12px;
+  border-radius: 5px;
   font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
+button[type="submit"]:hover {
   background-color: #388e3c;
 }
 
+/* Error Message Styling */
 .error-message {
   color: red;
   margin-top: 10px;
   text-align: center;
+  font-size: 14px;
+}
+
+/* Get All Coupons Button Styling */
+button.get-coupons-btn {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+button.get-coupons-btn:hover {
+  background-color: #1976d2;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Delete Button Styling */
+button.delete-btn {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.delete-btn:hover {
+  background-color: #c62828;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  button[type="submit"] {
+    grid-column: span 1;
+  }
 }

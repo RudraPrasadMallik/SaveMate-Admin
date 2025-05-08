@@ -3,7 +3,8 @@ import axios from "axios";
 class AdminApi {
   constructor() {
     this.api = axios.create({
-      baseURL:"https://savemate.onrender.com",
+      baseURL:"http://localhost:8081",
+      //"https://savemate.onrender.com",
       withCredentials: true,
     });
 
@@ -67,10 +68,21 @@ class AdminApi {
     return this.api.delete(`/admin/deletesections/${id}`);
   }
 
+
   createCoupon(coupon) {
     this.setAuthToken();
     return this.api.post("/admin/createcoupons", coupon);
   }
+
+  deleteCoupon(id) {
+    this.setAuthToken();
+    return this.api.delete(`/admin/deleteCoupon/${id}`);
+  }
+  getAllCoupons(){
+    this.setAuthToken();
+    return this.api.get("/admin/getcoupons");
+  }
+
 
   getSeoData(pageName) {
     this.setAuthToken();

@@ -1,4 +1,3 @@
-// src/admin/components/ManageCoupons.jsx
 import React, { useState } from "react";
 import AdminApi from "../../api/AdminApi";
 import "../../Styles/ManageCoupons.css";
@@ -18,6 +17,8 @@ const ManageCoupons = () => {
   });
 
   const [errorMessage, setErrorMessage] = useState("");
+  const [fieldErrors, setFieldErrors] = useState({});
+  const [coupons, setCoupons] = useState([]);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -26,10 +27,25 @@ const ManageCoupons = () => {
       ...prev,
       [name]: value
     }));
+    setFieldErrors((prev) => ({
+      ...prev,
+      [name]: ""
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Validate required fields
+    const errors = {};
+    if (!coupon.title.trim()) {
+      errors.title = "Title is required.";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      return;
+    }
 
     AdminApi.createCoupon(coupon)
       .then(() => {
@@ -46,6 +62,7 @@ const ManageCoupons = () => {
           type: ""
         });
         setErrorMessage("");
+        setFieldErrors({});
       })
       .catch((err) => {
         if (
@@ -59,6 +76,26 @@ const ManageCoupons = () => {
           setErrorMessage("Something went wrong. Please try again.");
         }
         console.error("Error creating coupon:", err);
+      });
+  };
+
+  const fetchCoupons = () => {
+    AdminApi.getAllCoupons()
+      .then((response) => {
+        setCoupons(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching coupons:", error);
+      });
+  };
+
+  const handleDelete = (id) => {
+    AdminApi.deleteCoupon(id)
+      .then(() => {
+        setCoupons(coupons.filter((coupon) => coupon.id !== id));
+      })
+      .catch((error) => {
+        console.error("Error deleting coupon:", error);
       });
   };
 
@@ -78,7 +115,6 @@ const ManageCoupons = () => {
             name="imgUrl"
             value={coupon.imgUrl}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -88,8 +124,12 @@ const ManageCoupons = () => {
             name="title"
             value={coupon.title}
             onChange={handleChange}
-            required
           />
+          {fieldErrors.title && (
+            <div className="error-message" style={{ color: "red" }}>
+              {fieldErrors.title}
+            </div>
+          )}
         </label>
 
         <label>
@@ -98,7 +138,6 @@ const ManageCoupons = () => {
             name="discountCode"
             value={coupon.discountCode}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -108,7 +147,6 @@ const ManageCoupons = () => {
             name="slug"
             value={coupon.slug}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -118,7 +156,6 @@ const ManageCoupons = () => {
             name="type"
             value={coupon.type}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -128,7 +165,6 @@ const ManageCoupons = () => {
             name="seoTitle"
             value={coupon.seoTitle}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -138,7 +174,6 @@ const ManageCoupons = () => {
             name="seoDescription"
             value={coupon.seoDescription}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -148,7 +183,6 @@ const ManageCoupons = () => {
             name="seoKeywords"
             value={coupon.seoKeywords}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -158,7 +192,6 @@ const ManageCoupons = () => {
             name="description"
             value={coupon.description}
             onChange={handleChange}
-            required
           ></textarea>
         </label>
 
@@ -169,6 +202,31 @@ const ManageCoupons = () => {
         <div className="error-message" style={{ color: "red", marginTop: "10px" }}>
           {errorMessage}
         </div>
+      )}
+
+      <button onClick={fetchCoupons}>Get All Coupons</button>
+
+      {coupons.length > 0 && (
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Slug</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {coupons.map((coupon) => (
+              <tr key={coupon.id}>
+                <td>{coupon.title}</td>
+                <td>{coupon.slug}</td>
+                <td>
+                  <button onClick={() => handleDelete(coupon.id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
     </div>
   );
