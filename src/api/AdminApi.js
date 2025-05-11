@@ -5,10 +5,10 @@ class AdminApi {
     this.api = axios.create({
       baseURL:"http://localhost:8081",
       //"https://savemate.onrender.com",
+      
       withCredentials: true,
     });
 
-    // ✅ Add request interceptor to attach token
     this.api.interceptors.request.use((config) => {
       const token = localStorage.getItem("admin_token");
       if (token) {
@@ -17,7 +17,6 @@ class AdminApi {
       return config;
     });
 
-    // ✅ Add response interceptor to handle expired tokens
     this.api.interceptors.response.use(
       (response) => response,
       (error) => {
