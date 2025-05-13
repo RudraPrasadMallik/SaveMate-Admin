@@ -7,8 +7,10 @@ const ManageCoupons = () => {
   const [coupon, setCoupon] = useState({
     imgUrl: "",
     title: "",
+    businessName:"",
     description: "",
     discountCode: "",
+    redirectionUrl:"",
     slug: "",
     seoTitle: "",
     seoDescription: "",
@@ -36,10 +38,13 @@ const ManageCoupons = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validate required fields
+    
     const errors = {};
     if (!coupon.title.trim()) {
-      errors.title = "Title is required.";
+      errors.title = "Title is required...";
+    }
+    if(!coupon.businessName.trim()){
+      errors.businessName ="Business Name is Required...";
     }
 
     if (Object.keys(errors).length > 0) {
@@ -49,12 +54,14 @@ const ManageCoupons = () => {
 
     AdminApi.createCoupon(coupon)
       .then(() => {
-        alert("Coupon created successfully!");
+         alert("Coupon created successfully!");
         setCoupon({
           imgUrl: "",
           title: "",
+          businessName:"",
           description: "",
           discountCode: "",
+          redirectionUrl:"",
           slug: "",
           seoTitle: "",
           seoDescription: "",
@@ -99,6 +106,7 @@ const ManageCoupons = () => {
       });
   };
 
+
   return (
     <div className="admin-container">
       <div className="admin-header">
@@ -115,22 +123,34 @@ const ManageCoupons = () => {
             name="imgUrl"
             value={coupon.imgUrl}
             onChange={handleChange}
+            placeholder="Enter the image Url here"
           />
         </label>
 
         <label>
-          Coupon Title
+          RedirectionUrl
           <input
-            name="title"
-            value={coupon.title}
+            name="redirectionUrl"
+            value={coupon.redirectionUrl}
             onChange={handleChange}
+            placeholder="Enter the redirection Url here"
           />
-          {fieldErrors.title && (
+        </label>
+        <label>
+          Business Name
+          <input
+            name="businessName"
+            value={coupon.businessName}
+            onChange={handleChange}
+            placeholder="Enter the Business Name"
+          />
+          {fieldErrors.businessName &&  (
             <div className="error-message" style={{ color: "red" }}>
               {fieldErrors.title}
             </div>
           )}
         </label>
+
 
         <label>
           Discount Code
@@ -138,6 +158,7 @@ const ManageCoupons = () => {
             name="discountCode"
             value={coupon.discountCode}
             onChange={handleChange}
+            placeholder="Enter the discount code here"
           />
         </label>
 
@@ -195,8 +216,24 @@ const ManageCoupons = () => {
           ></textarea>
         </label>
 
+        <label>
+          Coupon Title
+          <textarea
+            name="title"
+            value={coupon.title}
+            onChange={handleChange}
+            placeholder="Enter Coupon title here"
+          />
+          {fieldErrors.title &&  (
+            <div className="error-message" style={{ color: "red" }}>
+              {fieldErrors.title}
+            </div>
+          )}
+        </label>
+
         <button type="submit">Submit Coupon</button>
       </form>
+
 
       {errorMessage && (
         <div className="error-message" style={{ color: "red", marginTop: "10px" }}>
