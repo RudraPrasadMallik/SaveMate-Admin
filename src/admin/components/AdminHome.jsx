@@ -32,8 +32,8 @@ const AdminHome = () => {
         </div>
 
         <div className="admin-card red" onClick={() => navigate("/admin/coupons")}>
-          <h2>Manage Coupons</h2>
-          <p>Review and approve submitted coupons</p>
+          <h2>Manage Coupons / Deals</h2>
+          <p>Review and approve submitted coupons & Deals</p>
         </div>
         
         <div className="admin-card purple" onClick={() => navigate("/admin/seo")}>
