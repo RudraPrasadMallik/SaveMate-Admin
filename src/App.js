@@ -5,6 +5,7 @@ import Login from "./admin/components/Login";
 import ProtectedRoute from "./admin/components/ProtectedRouts";
 import ManageSections from "./admin/components/ManageSections";
 import ManageCoupons from "./admin/components/ManageCoupons";
+import ManageDeals from "./admin/components/ManageDeal";
 import ManageSeo from "./admin/components/ManageSeo";
 import ManageAds from "./admin/components/ManageAds"; 
 
@@ -42,7 +43,14 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-
+         <Route
+          path="/admin/deal"
+          element={
+            <ProtectedRoute>
+              <ManageDeals/>
+            </ProtectedRoute>
+          }
+         />
         <Route
           path="/admin/seo"
           element={

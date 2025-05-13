@@ -112,6 +112,21 @@ class AdminApi {
     return this.api.put(`/ads/update/${id}`, ad);
   }
 
+//Deal
+  createDeal(deal) {
+    this.setAuthToken();
+    return this.api.post("/admin/createdeal", deal);
+  }
+   deleteDeal(id) {
+    this.setAuthToken();
+    return this.api.delete(`/admin/deletedeal/${id}`);
+  }
+  getAllDeals(){
+    this.setAuthToken();
+    return this.api.get("/admin/getdeals");
+  }
+
+
   debugAuth() {
     return this.api.get("/debug");
   }

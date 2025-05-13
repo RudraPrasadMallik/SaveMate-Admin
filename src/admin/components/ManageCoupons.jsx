@@ -111,9 +111,13 @@ const ManageCoupons = () => {
     <div className="admin-container">
       <div className="admin-header">
         <h1>Create Coupon</h1>
+        <button className="btn" onClick={() => navigate("/admin/deal")}>
+          Create Deals
+        </button>
         <button className="logout-btn" onClick={() => navigate("/admin/home")}>
           Back to Dashboard
         </button>
+
       </div>
 
       <form onSubmit={handleSubmit} className="form-grid">
